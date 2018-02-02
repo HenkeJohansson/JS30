@@ -31,28 +31,74 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const inventorsFiltered = inventors.filter(inventor => inventor.year >= 1500 && inventor.year <= 1599);
+    console.log('1. Filter the list of inventors for those who were born in the 1500\'s');
+    console.table(inventorsFiltered);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    const inventorNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.log('2. Give us an array of the inventors\' first and last names');
+    console.log(inventorNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const inventorsOldestToYoungest = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
+    console.log('3. Sort the inventors by birthdate, oldest to youngest');
+    console.table(inventorsOldestToYoungest);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const totalAge = inventors.reduce((total, inventor) => {
+      return total + (inventor.passed - inventor.year);
+    }, 0);
+    console.log('4. How many years did all the inventors live?');
+    console.log(totalAge);
 
     // 5. Sort the inventors by years lived
+    const inventorsAges = inventors.sort((a, b) => {
+      const prevInventorAge = a.passed - a.year;
+      const nextInventorAge = b.passed - b.year;
+      return prevInventorAge > nextInventorAge ? 1 : -1;
+    });
+    console.log(' 5. Sort the inventors by years lived');
+    console.table(inventorsAges);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    /*
+    const cat = document.querySelector('.mw-category');
+    const links = [...cat.querySelectorAll('a')];
+    const de = links
+      .map(link => link.textContent)
+      .filter(link => link.includes('de'));
+    */
+    console.log('6. Create a list of Boulevards in Paris that contain \'de\' anywhere in the name');
+    console.log(["Boulevard de l'Amiral-Bruix", "Boulevard des Capucines", "Boulevard de la Chapelle", "Boulevard de Clichy", "Boulevard de l'Hôpital", "Boulevard des Italiens", "Boulevard de la Madeleine", "Boulevard de Magenta", "Boulevard de Rochechouart", "Boulevard de Sébastopol", "Boulevard de Strasbourg", "Boulevard de la Zone"]);
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedPeople = people.sort((prevPerson, nextPerson) => {
+      const [prevLast, prevFirst] = prevPerson.split(', ');
+      const [nextLast, nextFirst] = nextPerson.split(', ');
+      return prevLast > nextLast ? 1 : -1;
+    });
+    console.log('7. Sort Exercise');
+    console.table(sortedPeople);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const viricles = data.reduce((obj, item) => {
+      if(!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+    console.log('8. Reduce Exercise');
+    console.table(viricles);
 
   </script>
 </body>
