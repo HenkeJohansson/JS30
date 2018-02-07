@@ -18,28 +18,58 @@
     }
 
     // Regular
-
-    // Interpolated
-
-    // Styled
-
-    // warning!
-
-    // Error :|
-
-    // Info
-
-    // Testing
+    console.log('hello');
 
     // clearing
+    console.clear();
+
+    // Interpolated
+    console.log('Hello again %s', 'Mr Bond');
+
+    // Styled
+    console.log('%c Hello again Mr Bond', 'font-size: 32px; background: tomato; color: white;');
+
+    // warning!
+    console.warn('Woops...');
+
+    // Error :|
+    console.error('Aaah!!!');
+
+    // Info
+    console.info('fun facts');
+
+    // Testing
+    console.assert(true === true, 'Showns only when that is wrong');
 
     // Viewing DOM Elements
+    console.dir(dogs);
 
     // Grouping together
+    console.group();
+    console.log('1. message');
+    console.log('2. message');
+    console.log('3. message');
+    console.groupEnd();
 
     // counting
+    console.count('dog');
+    console.count('dog');
+    console.count('dog');
+    console.count('dog');
+    console.count('cat');
+    console.count('dog');
+    console.count('dog');
+    console.count('dog');
 
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/henkejohansson')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+      });
+
+    console.table(dogs);
 
   </script>
 </body>
