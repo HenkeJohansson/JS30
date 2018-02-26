@@ -9,12 +9,40 @@
 
   <div class="wrapper">
     <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
-    <div class="speed">
+    <div class="speed" style="user-select: none; cursor: move;cursor: grab;cursor: -moz-grab;cursor: -webkit-grab;">
       <div class="speed-bar">1×</div>
     </div>
   </div>
 
 <script>
+  const speed = document.querySelector('.speed');
+  const bar = document.querySelector('.speed-bar');
+  const video = document.querySelector('.flex');
+  let engage = false;
+
+  speed.addEventListener('mousemove', handlePlaybackRate);
+  speed.addEventListener('mousedown', () => {
+    engage = true;
+  });
+  speed.addEventListener('mouseup', () => {
+    engage = false;
+  });
+  speed.addEventListener('mouseleave', () => {
+    engage = false;
+  });
+
+  function handlePlaybackRate(e) {
+    if(!engage) return;
+    const y = e.pageY - this.offsetTop;
+    const percent = y / this.offsetHeight;
+    const min = 0.4;
+    const max = 5;
+    const height = Math.round(percent * 100)+'%';
+    const playbackRate = percent * (max - min) + min;
+    bar.style.height = height;
+    bar.textContent = playbackRate.toFixed(2)+'x';
+    video.playbackRate = playbackRate;
+  }
 </script>
 </body>
 </html>
